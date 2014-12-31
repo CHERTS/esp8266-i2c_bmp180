@@ -24,15 +24,14 @@ static volatile os_timer_t sensor_timer;
 
 void sensor_timerfunc(void *arg)
 {
-	uint32_t temperature;
-	uint32_t pressure;
-    char temp[80];
+	int32_t temperature;
+	int32_t pressure;
     ets_uart_printf("Get temperature and pressure...\r\n");
-    temperature = BMP180_GetVal(GET_BMP_TEMPERATURE);
-    pressure = BMP180_GetVal(GET_BMP_REAL_PRESSURE);
+    temperature = BMP180_GetTemperature();
+    pressure = BMP180_GetPressure(OSS_0);
     console_printf("Temperature: %ld\r\n", temperature);
     console_printf("Pressure: %ld Pa\r\n", pressure);
-    console_printf("Altitude: %ld m\r\n", BMP180_GetVal(GET_BMP_RELATIVE_PRESSURE)/10);
+    console_printf("Altitude: %ld m\r\n", BMP180_CalcAltitude(pressure)/10);
 }
 
 static void ICACHE_FLASH_ATTR

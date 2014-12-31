@@ -38,23 +38,24 @@
 #define BMP180_CTRL_REG				0xF4
 #define BMP180_DATA_REG				0xF6
 #define BMP_CMD_MEASURE_TEMP		0x2E	// Max conversion time 4.5ms
-//#define OSS							3		// 0..3
 #define BMP_CMD_MEASURE_PRESSURE_0	0x34	// Max conversion time 4.5ms (OSS = 0)
 //#define BMP_CMD_MEASURE_PRESSURE_1	0x74	// Max conversion time 7.5ms (OSS = 1)
 //#define BMP_CMD_MEASURE_PRESSURE_2	0xB4	// Max conversion time 13.5ms (OSS = 2)
 //#define BMP_CMD_MEASURE_PRESSURE_3	0xF4	// Max conversion time 25.5ms (OSS = 3)
-
-#define MYALTITUDE  153.0
+#define MYALTITUDE  				153.0
 
 #define BMP180_DEBUG 1
 
-enum {
-    GET_BMP_TEMPERATURE = 0,
-    GET_BMP_REAL_PRESSURE,
-    GET_BMP_RELATIVE_PRESSURE
+enum PRESSURE_RESOLUTION {
+	OSS_0 = 0,
+	OSS_1,
+	OSS_2,
+	OSS_3
 };
 
-uint32_t BMP180_GetVal(uint8_t mode);
 bool BMP180_Init(void);
+int32_t BMP180_GetTemperature();
+int32_t BMP180_GetPressure(enum PRESSURE_RESOLUTION resolution);
+int32_t BMP180_CalcAltitude(int32_t pressure);
 
 #endif
