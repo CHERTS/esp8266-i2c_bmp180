@@ -243,7 +243,7 @@ bool ICACHE_FLASH_ATTR BMP180_Init()
 	return 1;
 }
 
-int32_t BMP180_GetTemperature()
+int32_t ICACHE_FLASH_ATTR BMP180_GetTemperature()
 {
 	int32_t UT;
 	int32_t B5, X1, X2, T;
@@ -255,7 +255,7 @@ int32_t BMP180_GetTemperature()
 	return (T);
 }
 
-int32_t BMP180_GetPressure(enum PRESSURE_RESOLUTION resolution)
+int32_t ICACHE_FLASH_ATTR BMP180_GetPressure(enum PRESSURE_RESOLUTION resolution)
 {
 	int32_t UT;
 	uint16_t UP;
@@ -292,7 +292,7 @@ int32_t BMP180_GetPressure(enum PRESSURE_RESOLUTION resolution)
 	return P;
 }
 
-int32_t BMP180_CalcAltitude(int32_t pressure)
+int32_t ICACHE_FLASH_ATTR BMP180_CalcAltitude(int32_t pressure)
 {
 	return (int32_t)(pow(((float)MYALTITUDE/44330)+1,5.255F)*pressure);
 }
